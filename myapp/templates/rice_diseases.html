@@ -1,0 +1,211 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Rice Diseases</title>
+
+  <link href="{% static '/css/style.css' %}" rel="stylesheet">
+
+</head>
+
+<style type="text/css">
+
+  body{
+    background:#eee;
+  }
+  .content{
+    width:95%;
+    background:#fff;
+    padding:20px;
+    padding-top:0px;
+    font-family:calibri;
+    font-size:18px;
+    color:#444;
+    margin:0 auto;
+    max-height: 150px;
+    overflow: hidden;
+    -webkit-transition:max-height 0.7s ease;
+    -moz- transition:max-height 0.7s ease;
+    transition: max-height 0.7s ease;
+  }
+  .open{
+    width:95%;
+    background:#fff;
+    padding:20px;
+    padding-top:0px;
+    font-family:calibri;
+    font-size:18px;
+    color:#444;
+    margin:0 auto;
+    max-height: 1500px;
+    overflow: hidden;
+    -webkit-transition:max-height 0.7s ease;
+    -moz- transition:max-height 0.7s ease;
+    transition: max-height 0.7s ease;
+  }
+  #showMore{
+    background: #1594e5;
+    color:#fff;
+    font-family: calibri;
+    display: block;
+    width:150px;
+    font-size:18px;
+    text-transform: uppercase;
+    text-align: center;
+    cursor: pointer;
+    /*position: absolute;*/
+    padding:10px;
+  }
+</style>
+
+<body>
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item"><a href="/home">Home</a></li>
+  <li class="breadcrumb-item active">Rice Diseases</li>
+</ol>
+
+<div id="content" class="content">
+  <br><h1>Brown Spot Disease</h1>
+  <a id="showMore" align="rigth" onclick="showMore_function(this,'content')" style="background-color: #ff6666">Show More</a><br>
+  <h2>Symptoms</h2>
+  <p>Lesions are initially small, circular, and dark brown to purple-brown. Fully developed lesions are circular to oval with a brown   to gray center, surrounded by a reddish brown margin caused by the toxin produced by the fungi. On susceptible varielesions are 5 -   14 mm long which can cause leaves to wilt. On resistant varieties, the lesions are brown and pinhead-sized.
+  <p>Causal agent : Bipolaris oryzae<br>
+    Percentage of damage: Seedling 10 - 60%, Grains production period 5 - 45%<
+  <div class="container">
+  <div style="float:left;"><img class="img-responsive" src="{% static '11.png' %}" alt="Brown spot disease" width="200"></div>
+  <div style="float:left;"><img class="img-responsive" src="{% static '12.png' %}" alt="Brown spot disease" width="200"></div>
+  </div>
+  <h2>Managements</h2>
+  <p>
+    1. Monitor soil nutrients regularly and apply required fertilizers or apply calcium silicate slag before planting if silicon was<br>
+    2. Use resistant cultivars.<br>
+    3. Biological control such as Trichoderma spp., Bacillus subtilis, Pseudomonas fluorescens.<br>
+    4. Use fungicides (e.g., iprodione, propiconazole, azoxystrobin, trifloxystrobin, and carbendazim) as seed treatments.<br>
+    5. Treat seeds with hot water (53 - 54°C) for 10 - 12 minutes before planting, to control primary infection at the seedling stage.<p>
+</div>
+<br>
+
+<div id="content2" class="content">
+  <br><h1>Blast Disease</h1>
+  <a id="showMore" align="rigth" onclick="showMore_function(this,'content2')" style="background-color: #ff8c66">Show More</a><br>
+  <h2>Symptoms</h2>
+  <p> Initial symptoms are white to gray-green lesions or spots with darker borders produced on all parts of the shoot, while  older         lesions are elliptical or spindle-shaped and whitish to gray with necrotic borders. Lesions may enlarge and  coalesce to kill the        entire leaf. It also affects reproduction by causing the host to produce fewer seeds. </p>
+  <p>Causal agent : <i>Magnaporthe grisea, Pyricularia oryzae (anamorph)</i><br>
+  Percentage of damage: Seedling 90%, Grains production period 50%
+  </p>
+  <div class="container">
+  <div style="float:left;"><img class="img-responsive" src="{% static '/21.png' %}" alt="Blast disease" width="200"></div>
+  <div style="float:left;"><img class="img-responsive" src="{% static '/22.png' %}" alt="Blast disease" width="200"></div>
+  <div style="float:left;"><img class="img-responsive" src="{% static '/23.png' %}" alt="Blast disease" width="200"></div>
+  <div style="float:left;"><img class="img-responsive" src="{% static '/24.png' %}" alt="Blast disease" width="200"></div>
+  </div>
+  <h2>Managements</h2>
+  <p>1. Using resistance cultivars and seed collection by yourself.
+  <br>2. Integrated management program should be implemented.
+  <br>3. Managing the amount of water supplied to the crops limits spore mobility.
+  <br>4. Biological control such as Trichoderma spp., Bacillus subtilis, Pseudomonas fluorescens.
+  <br>5. Chemical controls such as carbendazim, kazukamycin, prochloraz, tricyclazol have been shown to prevent penetratioothe        pathogen.
+  <p>
+</div>
+<br>
+
+<div id="content3" class="content">
+  <br><h1>Bacterial Leaf Streak Disease</h1>
+  <a id="showMore" align="rigth" onclick="showMore_function(this,'content3')" style="background-color: #ffb366">Show More</a><br>
+  <h2>Symptoms</h2>
+  <p>Symptoms are narrow, dark-greenish, water-soaked, interveinal streaks of various lengths, initially restricted to the leaf blades. The lesions enlarge, turn yellowish-orange to brown (depending on cultivar), and eventually coalesce. Tiny amber droplets of bacterial exudate are often present on the lesions.</p>
+  <p>Causal agent : <i>Xanthomonas oryzae pv. oryzicola</i>
+  <br>Percentage of damage: Seedling 70%, Grains production period 30%</p>
+  <div class="container">
+  <div style="float:left;"><img class="img-responsive" src="{% static '/31.png' %}" alt="Bacterial leaf streak disease" width="200"></div>
+  <div style="float:left;"><img class="img-responsive" src="{% static '/32.png' %}" alt="Bacterial leaf streak disease" width="200"></div>
+  <div style="float:left;"><img class="img-responsive" src="{% static '/33.png' %}" alt="Bacterial leaf streak disease" width="200"></div>
+  </div>
+  <h2>Managements</h2>
+  <p>1. Phytosanitary measures to prevent the distribution of seed infected.
+  <br>2. Healthy seed is used.
+  <br>3. Suitable using  nitrogenous fertilizer because the use of excess nitrogenous fertilizer has shown an increase in incidence.
+  <br>4. Biological control such as Trichoderma spp., Bacillus subtilis, Pseudomonas fluorescens.
+  <br>5. Other control measures are not likely to be necessary. 
+  <p>
+</div>
+<br>
+
+<div id="content4" class="content">
+  <br><h1>Dirty Panicle Disease</h1>
+  <a id="showMore" align="rigth" onclick="showMore_function(this,'content4')" style="background-color: #ffd966">Show More</a><br>
+  <h2>Symptoms</h2>
+  <p>Infected seedlings have small, circular, yellow brown or brown lesions that may girdle the coleoptile and distort primary and secondary leaves.</p>
+  <p>Causal agent : <i>Curvularia lunata,
+                              Cercospora oryzae,
+                               Bipolaris oryzae,
+                               Fusarium semitectum,
+                              Trichoconis padwickii,
+                              Sarocladium oryzae
+  </i><br>
+  Percentage of damage: Seedling 80%, Grains production period 40%
+  </p>
+  <div class="container">
+  <div style="float:left;"><img class="img-responsive" src="{% static '/41.png' %}" alt="Dirty panicle disease" width="200"></div>
+  <div style="float:left;"><img class="img-responsive" src="{% static '/42.png' %}" alt="Dirty panicle disease" width="200"></div>
+  <div style="float:left;"><img class="img-responsive" src="{% static '/43.png' %}" alt="Dirty panicle disease" width="200"></div>
+  <div style="float:left;"><img class="img-responsive" src="{% static '/44.png' %}" alt="Dirty panicle disease" width="200"></div>
+  </div>
+  <h2>Managements</h2>
+  <p>1. Monitor soil nutrients regularly and apply required fertilizers or apply calcium silicate slag before planting if silicon was low. 
+  <br>2. Use resistant cultivars.
+  <br>3. Biological control such as Trichoderma spp., Bacillus subtilis, Pseudomonas fluorescens.
+  <br>4. Use fungicides (e.g., iprodione, propiconazole, azoxystrobin, trifloxystrobin, and carbendazim) as seed treatments.
+  <br>5. Treat seeds with hot water (53 - 54°C) for 10 - 12 minutes before planting, to control primary infection at the seedling stage.
+  <p>
+</div>
+<br>
+
+<div id="content5" class="content">
+  <br><h1>Bacterial Leaf Blight Disease</h1>
+  <a id="showMore" align="rigth" onclick="showMore_function(this,'content5')" style="background-color: #ffff66">Show More</a><br>
+  <h2>Symptoms</h2>
+  <p> Lesions are pale-green to grey-green, water-soaked streaks near the leaf tip and margins. In older plants, the leaves become yellow and then die. </p>
+  <p>Causal agent : <i>Xanthomonas oryzae pv. oryzae</i><br> 
+  Percentage of damage: Seedling 80%, Grains production period 40%
+  </p>
+  <div class="container">
+  <div style="float:left;"><img class="img-responsive" src="{% static '/51.png' %}" alt="Bacterial leaf blight disease" width="200"></div>
+  <div style="float:left;"><img class="img-responsive" src="{% static '/52.png' %}" alt="Bacterial leaf blight disease" width="200"></div>
+  <div style="float:left;"><img class="img-responsive" src="{% static '/53.png' %}" alt="Bacterial leaf blight disease" width="200"></div>
+  </div>
+  <h2>Managements</h2>
+  <p>1. Planting resistant rice cultivars.  
+  <br> 2. Suitable using  nitrogenous fertilizer because the use of excess nitrogenous fertilizer has shown an increase in incidence.
+  <br>3. Biological control such as Trichoderma spp., Bacillus subtilis, Pseudomonas fluorescens.
+  <br>4. Chemical controls such as Carbendazim, kazukamycin, prochloraz, tricyclazol have been shown to prevent penetration of the pathogen.
+  </p>
+</div>
+<br>
+
+
+<script type="text/javascript">
+
+  function showMore_function(id,id2){
+    var mycontent = document.getElementById(id2);
+    if(mycontent.className == "open"){
+      mycontent.className = "content";
+      id.innerHTML = "SHOW MORE"
+    }else{
+      mycontent.className = "open";
+      id.innerHTML = "SHOW LESS"
+    }
+  }
+</script>
+
+</body>
+</html>
+  
+    <!--<script src="js/index.js"></script>-->
+    <!--<script src="{% static '/more_less/index.js' %}"></script>-->
+
+</body>
+
+
+</html>

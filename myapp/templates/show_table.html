@@ -1,0 +1,126 @@
+<html>
+
+<!-- <meta http-equiv="refresh" content="3"> -->
+
+<head>
+
+	<!--
+	<link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css">
+	<script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	-->
+</head>
+
+<style type="text/css">
+
+	*{
+   		/*font-size: 1em !important;
+   		color: #000 !important;*/
+   		font-family: Arial !important;
+	}
+
+	ul.nav{
+		list-style-type: none;
+    	margin: -8;
+    	padding: 0;
+    	overflow: hidden;
+    	background-color: #fff;
+	}
+
+	li{
+		display: block;
+    	text-align: center;
+    	padding: 20px 16px;
+    	text-decoration: none;
+    	font-size: 12px;
+	}
+
+	li.head{
+    	float: left;
+    	color: #fff;
+    	background-color: #333;
+    	font-size: 20px;
+    	padding: 15.5px 16px;
+	}
+
+	li.nav{
+    	float: left;
+   		color: #ccc;
+   		background-color: #fff;
+	}
+
+	li.nav:hover{
+		background-color: #f2f2f2;
+	}
+
+	li.active{
+    	float: left;
+   		color: #fff;
+    	background-color: #333;
+	}
+
+
+	/* Table */
+	table{
+		/*opacity: 0.9;*/
+		background-color: #fff;
+		width: 100%;
+		text-align: center;
+		border-spacing: 0;
+	}
+
+	tr.head{
+		background-color: #06f;
+		color: #fff;
+	}
+
+	tr.regular:nth-child(even) {
+    	background-color: #eee;
+	}
+	tr.regular:nth-child(odd) {
+   		background-color:#fff;
+	}
+
+
+
+</style>
+
+<!-- <body background="static/background.jpg"> -->
+<body bgcolor="#fff">
+
+	<ul class="nav">
+		<li class="head">Forecast</li>
+		<li class="nav">Home</li>
+		<li class="nav">Rice Diseases</li>
+		<li class="nav">Graph</li>
+		<li class="active">Data</li>
+		<li class="nav">Contect</li>
+	</ul>
+
+	<br>
+	<table id="myTable">
+		<tr class="head">
+			<th>time</th>
+			<th>nodeid</th>
+			<th>temp</th>
+			<th>humi</th>
+			<th>israin</th>
+		</tr>
+		{% for r in data %}
+		<tr class="regular">
+			<td>{{r.time}}</td>
+			<td>{{r.nodeid}}</td>
+			<td>{{r.temp}}</td>
+			<td>{{r.humi}}</td>
+			<td>{{r.israin}}</td>
+		</tr>
+		{% endfor %}
+	</table>
+	<script>
+		$(document).ready(function(){
+		    $('#myTable').DataTable();
+		});
+	</script>
+
+</body>
+</html>

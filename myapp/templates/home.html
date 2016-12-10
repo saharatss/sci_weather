@@ -1,0 +1,424 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Forecast</title>
+        <!-- Icons -->
+        <link href="{% static '/css/font-awesome.min.css' %}" rel="stylesheet">
+        <link href="{% static '/css/simple-line-icons.css' %}" rel="stylesheet">
+        <!-- Main styles for this application -->
+        <link href="{% static '/css/style.css' %}" rel="stylesheet">
+
+        <script src="{% static '/js/app.js' %}" ></script>
+        <script src="{% static '/js/views/charts.js' %}"></script>
+
+        <!-- Back Up DropDown
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+ 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        -->
+
+  		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <script src="{% static '/amcharts/amcharts.js' %}" type="text/javascript"></script>
+        <script src="{% static '/amcharts/serial.js' %}" type="text/javascript"></script>
+
+
+        <script>
+
+        	var nodeid = 0;
+
+            var chart = [];
+            var graph;
+
+            //var chartData = chart_data;
+            /*
+            var chartData = [{'date':'1-1-2016','temp':25.0},
+            				 {'date':'2-1-2016','temp':20.0},
+            				 {'date':'4-2-2016','temp':21.0},
+            				 {'date':'4-3-2016','temp':22.0}
+            				];
+
+            chartData = 	[{'date':'1 1 1 1 2016','temp':25.0},
+            				 {'date':'2 1 2 1 2016','temp':20.0},
+            				 {'date':'3 1 4 2 2016','temp':21.0},
+            				 {'date':'3 2 4 3 2016','temp':22.0}
+            				];
+            */
+
+           	chartData = {{chart_data|safe}};
+
+            //chartData = document.getElementsByTagName('chart_data');
+
+
+            AmCharts.ready(function () {
+                // SERIAL CHART
+                chart = new AmCharts.AmSerialChart();
+
+                chart.dataProvider = chartData;
+                chart.marginLeft = 10;
+                chart.categoryField = "date";
+                chart.dataDateFormat = "DD MM YYYY";
+
+                // listen for "dataUpdated" event (fired when chart is inited) and call zoomChart method when it happens
+                //chart.addListener("dataUpdated", zoomChart);
+
+                // AXES
+                // category
+                var categoryAxis = chart.categoryAxis;
+                categoryAxis.parseDates = true; // as our data is date-based, we set parseDates to true
+                categoryAxis.minPeriod = "DD"; // our data is yearly, so we set minPeriod to YYYY
+                categoryAxis.dashLength = 3;
+                categoryAxis.minorGridEnabled = true;
+                categoryAxis.minorGridAlpha = 0.1;
+
+                // value
+                var valueAxis = new AmCharts.ValueAxis();
+                valueAxis.axisAlpha = 0;
+                valueAxis.inside = true;
+                valueAxis.dashLength = 3;
+                chart.addValueAxis(valueAxis);
+
+                // GRAPH
+                graph = new AmCharts.AmGraph();
+                graph.type = "smoothedLine"; // this line makes the graph smoothed line.
+                graph.lineColor = "#668cff";
+                graph.negativeLineColor = "#668cff"; // this line makes the graph to change color when it drops below 0
+                graph.bullet = "round";
+                graph.bulletSize = 8;
+                graph.bulletBorderColor = "#FFFFFF";
+                graph.bulletBorderAlpha = 1;
+                graph.bulletBorderThickness = 2;
+                graph.lineThickness = 2;
+                graph.valueField = "temp";
+                graph.balloonText = "[[category]]<br><b><span style='font-size:14px;'>[[value]]</span></b>";
+                chart.addGraph(graph);
+
+                // CURSOR
+                var chartCursor = new AmCharts.ChartCursor();
+                chartCursor.cursorAlpha = 0;
+                chartCursor.cursorPosition = "mouse";
+                //chartCursor.categoryBalloonDateFormat = "H:N D-M-YYYY";
+                chartCursor.categoryBalloonDateFormat = "DD-MM-YYYY";
+                chart.addChartCursor(chartCursor);
+
+                // SCROLLBAR
+                //var chartScrollbar = new AmCharts.ChartScrollbar();
+                //chart.addChartScrollbar(chartScrollbar);
+
+                chart.creditsPosition = "bottom-right";
+
+                // WRITE
+                chart.write("chartdiv");
+            });
+
+            // this method is called when chart is first inited as we listen for "dataUpdated" event
+            function zoomChart() {
+                // different zoom methods can be used - zoomToIndexes, zoomToDates, zoomToCategoryValues
+                chart.zoomToDates(new Date(1972, 0), new Date(1984, 0));
+            }
+        </script>
+
+
+    </head>
+
+    <style>
+    body{
+        background-color: #fcfcfc;
+    }
+    	canvas{
+    	    -moz-user-select: none;
+    	    -webkit-user-select: none;
+    	    -ms-user-select: none;
+    	}
+	
+    	table{
+			/*opacity: 0.9;*/
+			background-color: #fff;
+			width: 100%;
+			text-align: center;
+			border-spacing: 0;
+		}
+	
+		tr.head{
+			background-color: #b3ff66;
+			color: #fff;
+            font-size: 18px;
+            font-family: calibri;
+            height:30px;
+		}
+
+		th{
+			text-align: center;
+		}
+	
+    	tr.regular:nth-child(even) {
+    		background-color: #eee;
+            height: 25px;
+		}
+		tr.regular:nth-child(odd) {
+   			background-color:#fff;
+            height: 25px;
+		}
+
+        tr.table2{
+            height: 20px;
+            text-align: left;
+            font-size: 14px;
+        }
+        td.table2col2{
+            text-align: center;
+        }
+
+        .progress-info[value]::-webkit-progress-value { background-color: #8c66ff; }
+        .progress-info[value]::-moz-progress-bar { background-color: #8c66ff; }
+        .progress-info[value]::-ms-fill { background-color: #8c66ff; }
+
+        
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #fff;
+            min-width: 80px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            margin-left: -14px;
+            padding: 12px 16px;
+            z-index: 99;
+        }
+        
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+    </style>
+
+    <body>
+        <main class="main">
+            <!-- Breadcrumb -->
+            <ol class="breadcrumb">
+               	<li class="breadcrumb-item active">Home</li>
+            </ol>
+            <div class="container-fluid"">
+            <div class="animated fadeIn">
+
+                <div class="row">
+					<div class="col-sm-2 col-lg-2">
+                        <div class="card card-inverse text-xs-center" style="background-color: #ff668c"> 
+                            <div class="card-block pb-0">
+                                <div class="btn-group float-xs-right">
+                                <!--
+									<button class="btn btn-link dropdown-toggle" id="menu1" type="button" data-toggle="dropdown"></button>
+    								<div class="dropdown-menu" role="menu" aria-labelledby="menu1">
+    									<div class="dropdown-content">
+                                        {% for row in nodeid_array %}-->
+
+                                        <!-- <li role="presentation"><a role="menuitem" tabindex="-1" onclick="myFunction({{row}})">{{row}}</a></li> -->
+                                        
+                                        <!--<li style="list-style-type: none;" role="presentation"><a role="menuitem" tabindex="-1" href="/{{row}}">{{row}}</a></li>
+                                        {% endfor %}
+                                      </div>
+    								</div>
+                                    -->
+
+                                    <div class="dropdown">
+                                      <button class="btn btn-link dropdown-toggle"> </button>
+                                      <div class="dropdown-content">
+                                        {% for row in nodeid_array %}
+                                        <!-- <li role="presentation"><a role="menuitem" tabindex="-1" onclick="myFunction({{row}})">{{row}}</a></li> -->
+                                        <li style="list-style-type: none;" role="presentation"><a role="menuitem" tabindex="-1" href="/{{row}}">{{row}}</a></li>
+                                        {% endfor %}
+                                      </div>
+                                    </div>
+
+                                </div>
+                                <h4 class="mb-0">{{real_nodeid}}</h4>
+                                <p>Node</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-4 col-lg-4">
+                        <div class="card card-inverse text-xs-center" style="background-color: #ff66ff">
+                            <div class="card-block pb-0">
+                                <h4 class="mb-0">{{real_time}}</h4>
+                                <p>Time</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-2 col-lg-2">
+                        <div class="card card-inverse text-xs-center" style="background-color: #668cff">
+                            <div class="card-block pb-0">
+                                <h4 class="mb-0">{{real_temp}}</h4>
+                                <p>Temperature</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-2 col-lg-2">
+                        <div class="card card-inverse text-xs-center" style="background-color: #66b3ff">
+                            <div class="card-block pb-0">
+                                <h4 class="mb-0">{{real_humi}}</h4>
+                                <p>Humidity</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-2 col-lg-2">
+                        <div class="card card-inverse text-xs-center" style="background-color: #66d9ff">
+                            <div class="card-block pb-0">
+                                <h4 class="mb-0">{{real_israin}}</h4>
+                                <p>Rain</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+               	<div class="row">
+               		<div class="col-sm-8 col-lg-9">
+                        <div class="card" style="height: 410px;">
+
+                            <div id="chartdiv" style="width:100%; height:400px; padding-left: 10px"></div>
+
+                        </div>
+                    </div>
+
+                    <div class="col-sm-4 col-lg-3">
+                    	<div class="row-sm-6 row-lg-6" align="center">
+                    		<div class="card" style="height: 343px;">
+                            <h3 style="text-align: center; display: block; background-color: #8c66ff; margin-top: 0px; height: 45px; padding: 10px; color: #fff">Possible Diseases</h3>
+                    		<!--<p>{{chart_data|safe}}</p>-->
+                            <!--<div style="width: 100%; height: 150px">-->
+                                <div style="width: 90%; margin: 5px; height: 150px;" align="left">
+                                    <ul class="horizontal-bars type-2">
+                                            <li style="margin-top: 15px;">
+                                            <span style="font-size: 16px">Brow Spot</span>
+                                            <span class="value">43%</span>
+                                            <div class="bars">
+                                                <progress class="progress progress-xs progress-info m-0" value="43" max="100">43%</progress>
+                                                </div>
+                                            </li>
+                                            <li style="margin-top: 12px;">
+                                                <span style="font-size: 16px">Blast</span>
+                                                <span class="value">43%</span>
+                                                <div class="bars">
+                                                    <progress class="progress progress-xs progress-info m-0" value="43" max="100">43%</progress>
+                                                </div>
+                                            </li>
+                                            <li style="margin-top: 12px;">
+                                                <span style="font-size: 16px">Bacterial Leaf Streak</span>
+                                                <span class="value">43%</span>
+                                                <div class="bars">
+                                                    <progress class="progress progress-xs progress-info m-0" value="43" max="100">43%</progress>
+                                                </div>
+                                            </li>
+                                            <li style="margin-top: 12px;">
+                                                <span style="font-size: 16px;">Dirty Panicle</span>
+                                                <span class="value">43%</span>
+                                                <div class="bars">
+                                                    <progress class="progress progress-xs progress-info m-0" value="43" max="100">43%</progress>
+                                                </div>
+                                            </li>
+                                            <li style="margin-top: 12px;">
+                                                <span style="font-size: 16px">Bacterial Leaf Blight</span>
+                                                <span class="value">43%</span>
+                                                <div class="bars">
+                                                    <progress class="progress progress-xs progress-info m-0" value="43" max="100">43%</progress>
+                                                </div>
+                                            </li>
+                                        </ul>
+                        	</div>
+                    	</div>
+                    	<div class="row-sm-6 row-lg-6">
+                    		<div class="card"  style="text-align: center;">
+                                <a class="link1" style="display: block; padding:10px; text-decoration : none; color: #fff; background-color: #8c66ff" href="/rice_diseases">show more - Rice Diseases</a>
+                        	</div>
+                    	</div>
+                    </div>
+                    </div>
+               	</div>
+
+               	<div class="row">
+               	<div class="col-sm-12 col-lg-12">
+                    <div class="card">
+                    	<table id="myTable">
+							<tr class="head">
+								<th style="background-color: #ff668c; width: 10%;">Node</th>
+								<th style="background-color: #ff66ff;">Time</th>
+								<th style="background-color: #668cff; width: 15%;">Temperature</th>
+								<th style="background-color: #66b3ff; width: 15%;">Humidity</th>
+								<th style="background-color: #66d9ff; width: 15%;">Rain</th>
+							</tr>
+							{% for r in data %}
+							<tr class="regular">
+								<td>{{r.nodeid}}</td>
+								<td>{{r.time}}</td>
+								<td>{{r.temp}}</td>
+								<td>{{r.humi}}</td>
+								<td>{{r.israin}}</td>
+							</tr>
+							{% endfor %}
+						</table>
+						<script>
+							$(document).ready(function(){
+							    $('#myTable').DataTable();
+							});
+						</script>
+                    </div>
+               	</div>
+               	</div>
+                
+                <aside class="aside-menu">
+                    <ul class="nav nav-tabs" role="tablist">
+                        ...
+                    </ul>
+        
+                    <div class="tab-content">
+                        ...
+                    </div>
+                </aside>
+                <footer class="footer">
+                    <span class="text-left">
+                        <a href="http://coreui.io">CoreUI</a> &copy; 2016 creativeLabs.
+                    </span>
+                    <span class="pull-right">
+                        Develop by <a href="https://www.facebook.com/wasitl">Wasit Limprasert</a>
+                    </span>
+                </footer>
+
+            </div>
+            </div>
+
+            </main>
+
+        <!--
+        <div style="width: 100%; height: 1px; background-color: #cccccc;"></div>
+        <div style="width: 100%; height: 40px; background-color: #eee; color: #ccc;">
+            <a style="padding: 10px; font-size: 18px;">Contact : </a>
+        </div>-->
+
+        <script>
+
+        	function myFunction(var node){
+        		nodeid = node
+        	}
+
+            $(document).ready(function(){
+                $.ajax({
+                        url: {% url "data_exchanger" %},
+                        type: 'GET',
+                        data:{
+                                nodeid: JSON.stringify(nodeid)
+                        },
+                        success: function(data_from_server) {
+                                console.log( JSON.stringify(server_data) );
+                        }
+                });
+            });
+        </script>
+
+    </body>
+</html>
